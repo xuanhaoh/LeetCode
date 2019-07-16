@@ -1,0 +1,23 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+    	if (nums.length == 0)
+    		return 0;
+    	return search(nums, 0, nums.length - 1, target);
+    }
+    
+    public int search(int[] nums, int low, int high, int target) {
+    	int mid = (low + high) / 2;
+    	if (nums[mid] == target)
+    		return mid;
+    	else if (nums[mid] > target) {
+    		if (mid - 1 < low)
+    			return low;
+    		return search(nums, low, mid - 1, target);
+    	}
+    	else {
+    		if (mid + 1 > high)
+    			return mid + 1;
+    		return search(nums, mid + 1, high, target);
+    	}
+    }
+}
