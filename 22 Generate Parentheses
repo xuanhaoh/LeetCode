@@ -1,0 +1,18 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<String>();
+        generate(ans, 0, 0, "", n);
+        return ans;
+    }
+    
+    public void generate(List<String> ans, int open, int close, String curr, int n) {
+    	if (curr.length() == n * 2)
+    		ans.add(curr);
+    	else {
+    		if (open < n)
+    			generate(ans, open + 1, close, curr + "(", n);
+    		if (close < open)
+    			generate(ans, open, close + 1, curr + ")", n);
+    	}
+    }
+}
