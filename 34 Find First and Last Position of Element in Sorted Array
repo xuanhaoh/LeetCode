@@ -1,0 +1,32 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+    	int[] ans = new int[2];
+        ans[0] = (nums.length == 0)? -1 : searchLow(nums, target, 0, nums.length - 1);
+        ans[1] = (nums.length == 0)? -1 : searchHigh(nums, target, 0, nums.length - 1);
+        return ans;
+    }
+    
+    public int searchLow(int[] nums, int target, int low, int high) {
+    	if (low > high)
+    		return -1;
+    	int mid = (low + high) / 2;
+    	if (nums[mid] == target && (mid > low && nums[mid - 1] != target || mid == low))
+    		return mid;
+    	else if (nums[mid] < target)
+    		return searchLow(nums, target, mid + 1, high);
+    	else
+    		return searchLow(nums, target, low, mid - 1);
+    }
+    
+    public int searchHigh(int[] nums, int target, int low, int high) {
+    	if (low > high)
+    		return -1;
+    	int mid = (low + high) / 2;
+    	if (nums[mid] == target && (mid < high && nums[mid + 1] != target || mid == high))
+    		return mid;
+    	else if (nums[mid] > target)
+    		return searchHigh(nums, target, low, mid - 1);
+    	else
+    		return searchHigh(nums, target, mid + 1, high);
+    }
+}
